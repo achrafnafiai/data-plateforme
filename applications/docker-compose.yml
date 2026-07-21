@@ -1,0 +1,60 @@
+version: '3.8'
+
+networks:
+  data-pipeline:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+
+services:
+  # ============================================
+  # NIFI - Orchestration des données
+  # ============================================
+  nifi:
+    image: apache/nifi:2.0.0
+    container_name: nifi
+    hostname: nifi
+    environment:
+      # Configuration générale
+      - NIFI_WEB_HTTP_PORT=8080
+      - NIFI_WEB_HTTP_HOST=0.0.0.0
+      - NIFI_SENSITIVE_PROPS_KEY='nifi-salt-123456789'
+      
+      # JVM
+      - NIFI_JVM_HEAP_INIT=513m
+      - NIFI_JVM_HEAP_MAX=2048m
+      
+      # Logs
+      - NIFI_LOG_LEVEL=INFO
+      
+      # Connexions externes
+      - AWS_ACCESS_KEY_ID=${MINIO_ACCESS_KEY}
+      - AWS_SECRET_ACCESS_KEY=${MINIO_SECRET_KEY}
+      - AWS_ENDPOINT=${MINIO_ENDPOINT}
+    volumes:
+  # Configuration (commenté pour utiliser celle de l'image)
+  # - /data-plateforme/applications/nifi/conf:/opt/nifi/nifi-current/conf
+  
+  # Logs, database, flow_storage, data (conservés)
+      - /data-plateforme/opt/nifi/conf:/opt/nifi/nifi-current/conf
+      - /data-plateforme/opt/nifi/logs:/opt/nifi/nifi-current/logs
+      - /data-plateforme/opt/nifi/database:/opt/nifi/nifi-current/database
+      - /data-plateforme/opt/nifi/flow_storage:/opt/nifi/nifi-current/flow_storage
+      - /data-plateforme/opt/nifi/data:/opt/nifi/nifi-current/data      
+      - /data-plateforme/opt/nifi/jdbc:/opt/nifi/nifi-current/jdbc
+
+    ports:
+      - "8080:8080"      # Interface Web NiFi
+      - "8443:8443"      # HTTPS (optionnel)
+      
+    networks:
+      data-pipeline:
+        ipv4_address: 172.25.0.100
+        
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      
+    restart: unless-stopped
+
+

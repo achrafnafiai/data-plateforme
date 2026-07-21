@@ -1,0 +1,30 @@
+# Dossiers binaires de NiFi (lourds, inutiles en Git)
+opt/nifi/content_repository/
+opt/nifi/flowfile_repository/
+opt/nifi/provenance_repository/
+opt/nifi/database_repository/
+opt/nifi/nar_repository/
+opt/nifi/logs/
+opt/nifi/work/
+opt/nifi/run/
+opt/nifi/state/
+
+# Librairies et drivers (ne pas versionner car trop gros)
+opt/nifi/lib/*.jar
+opt/nifi/jdbc/*.jar
+opt/nifi/*.nar
+
+# Fichiers sensibles de configuration (mots de passe, clés)
+opt/nifi/conf/login-identity-providers.xml
+opt/nifi/conf/authorizers.xml
+opt/nifi/conf/keystore.jks
+opt/nifi/conf/truststore.jks
+opt/nifi/conf/nifi.properties
+
+# Fichiers temporaires
+*.tmp
+*.pid
+*.log
+#
+#
+#
