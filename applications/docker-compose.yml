@@ -22,7 +22,7 @@ services:
       - NIFI_SENSITIVE_PROPS_KEY='nifi-salt-123456789'
       
       # JVM
-      - NIFI_JVM_HEAP_INIT=512m
+      - NIFI_JVM_HEAP_INIT=513m
       - NIFI_JVM_HEAP_MAX=2048m
       
       # Logs
