@@ -43,7 +43,8 @@ services:
       - /data-plateforme/opt/nifi/flow_storage:/opt/nifi/nifi-current/flow_storage
       - /data-plateforme/opt/nifi/data:/opt/nifi/nifi-current/data      
       - /data-plateforme/opt/nifi/jdbc:/opt/nifi/nifi-current/jdbc
-
+      - /data-plateforme/opt/nifi/nifi-flows:/opt/nifi/nifi-current/nifi-flows
+      - /data-plateforme/opt/nifi/nar_extensions:/opt/nifi/nifi-current/nar_extensions
     ports:
       - "8080:8080"      # Interface Web NiFi
       - "8443:8443"      # HTTPS (optionnel)
