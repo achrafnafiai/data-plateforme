@@ -1,0 +1,11 @@
+{
+  "flow" : {
+    "createdTimestamp" : 1785610528671,
+    "description" : "",
+    "identifier" : "flowinformix",
+    "lastModifiedTimestamp" : 1785610528671,
+    "name" : "flow_informix",
+    "versionCount" : 0
+  },
+  "latest" : false
+}
