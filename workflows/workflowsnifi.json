@@ -1,0 +1,11 @@
+{
+  "flow" : {
+    "createdTimestamp" : 1785839212460,
+    "description" : "",
+    "identifier" : "workflowsnifi",
+    "lastModifiedTimestamp" : 1785839212460,
+    "name" : "workflows_nifi",
+    "versionCount" : 0
+  },
+  "latest" : false
+}
