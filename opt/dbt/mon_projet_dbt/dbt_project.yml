@@ -1,0 +1,25 @@
+name: 'mon_projet_dbt'
+version: '1.0.0'
+config-version: 2
+
+profile: 'mon_projet_dbt'
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+models:
+  mon_projet_dbt:
+    bronze:
+      +schema: bronze
+      +materialized: table
+      +file_format: parquet
+      +location_root: "s3a://bronze/B01-marketing/"
+    silver:
+      +schema: silver
+      +materialized: table
+      +file_format: parquet
+      +location_root: "s3a://silver/"
+    gold:
+      +schema: gold
+      +materialized: table
+      +file_format: parquet
+      +location_root: "s3a://gold/"
