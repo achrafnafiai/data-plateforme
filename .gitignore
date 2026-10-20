@@ -25,6 +25,28 @@ opt/nifi/conf/nifi.properties
 *.tmp
 *.pid
 *.log
+*.env
+cat >> /data-plateforme/.gitignore <<'EOF'
+
+# dbt artifacts
+target/
+dbt_packages/
+logs/
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Fichiers temporaires / erreurs
+metastore_db/
+git.conf
+ip-fixe
+step
+versionner_nifi
+procedure_installation_spark
+udo journalctl*
+EOF
 #
 #
 #
