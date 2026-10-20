@@ -1,0 +1,16 @@
+version: 2
+sources:
+- name: raw
+  description: Données brutes déposées par NiFi dans MinIO
+  database: default
+  schema: default
+  tables:
+  - name: clients
+    description: Table brute clients (Informix)
+    external_location: s3a://raw-data/informix/clients/
+  - name: ordres
+    description: Table brute ordres (Informix)
+    external_location: s3a://raw-data/informix/ordres/
+  - name: produits
+    description: Table brute produits (Informix)
+    external_location: s3a://raw-data/informix/produits/

@@ -15,10 +15,9 @@ services:
     hostname: nifi
     environment:
       # Configuration générale
-      - NIFI_WEB_HTTP_PORT=8080
-      - NIFI_WEB_HTTP_HOST=0.0.0.0
-      - NIFI_SENSITIVE_PROPS_KEY=nifi-salt-123456789
-      
+      - NIFI_WEB_HTTP_PORT=8084
+      - NIFI_WEB_HTTP_HOST=nifi
+      - NIFI_SENSITIVE_PROPS_KEY=${NIFI_SENSITIVE_PROPS_KEY}   
       # JVM
       - NIFI_JVM_HEAP_INIT=513m
       - NIFI_JVM_HEAP_MAX=2048m
@@ -44,7 +43,7 @@ services:
       - /data-plateforme/opt/nifi/nifi-flows:/opt/nifi/nifi-current/nifi-flows
       - /data-plateforme/opt/nifi/nar_extensions:/opt/nifi/nifi-current/nar_extensions
     ports:
-      - "8080:8080"      # Interface Web NiFi
+      - "8090:8082"      # Interface Web NiFi
       - "8443:8443"      # HTTPS (optionnel)
     networks:
       data-pipeline:
@@ -53,34 +52,3 @@ services:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped
 
-  # ============================================
-  # NIFI REGISTRY - Gestion des versions de flows
-  # ============================================
-  nifi-registry:
-    image: apache/nifi-registry:2.0.0
-    container_name: nifi-registry
-    hostname: 192.168.11.206
-    ports:
-      - "18080:18080"
-    environment:
-      - NIFI_REGISTRY_WEB_HTTP_PORT=18080
-      - NIFI_REGISTRY_WEB_HTTP_HOST=0.0.0.0
-      - GIT_REMOTE_URL=${GIT_REPO_URL}
-      - GIT_USERNAME=${GIT_USERNAME}
-      - GIT_PASSWORD=${GIT_TOKEN}
-    
-    # Configuration pour le provider Git
-      - NIFI_REGISTRY_GIT_REMOTE_URL=${GIT_REPO_URL}
-      - NIFI_REGISTRY_GIT_USERNAME=${GIT_USERNAME}
-      - NIFI_REGISTRY_GIT_PASSWORD=${GIT_TOKEN}
-    volumes:
-     # - /data-plateforme/opt/nifi-registry/conf:/opt/nifi-registry/nifi-registry-current/conf
-      - /data-plateforme/opt/nifi-registry/database:/opt/nifi-registry/nifi-registry-current/database
-      - /data-plateforme/opt/nifi-registry/flow_storage:/opt/nifi-registry/nifi-registry-current/flow_storage
-      - /data-plateforme/opt/nifi-registry/conf:/opt/nifi-registry/nifi-registry-current/conf
-    networks:
-      data-pipeline:
-        ipv4_address: 172.25.0.110
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    restart: unless-stopped
