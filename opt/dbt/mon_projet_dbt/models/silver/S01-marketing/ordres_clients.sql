@@ -14,4 +14,14 @@ LEFT JOIN {{ ref('clients') }} c
 
 )
 
-SELECT * FROM ordres_clients
+SELECT
+       nom, 
+       prenom, 
+       id_ordre, 
+       id_client, 
+       id_produit, 
+       date_commande, 
+       quantite, 
+       montant 
+ 
+FROM ordres_clients
