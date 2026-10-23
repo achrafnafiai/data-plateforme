@@ -17,7 +17,7 @@ models:
       +schema: silver
       +materialized: table
       +file_format: parquet
-      +location_root: "s3a://silver/"
+      +location_root: "s3a://silver/S01-marketing"
     gold:
       +schema: gold
       +materialized: table
