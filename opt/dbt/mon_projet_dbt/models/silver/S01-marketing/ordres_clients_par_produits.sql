@@ -8,8 +8,7 @@ SELECT
        o.quantite, 
        o.montant
        p.nom_produit,
-       p.categorie,
-       p.stock
+       p.categorie
  
 FROM {{ ref('ordres') }} o
 LEFT JOIN {{ ref('clients') }} c
