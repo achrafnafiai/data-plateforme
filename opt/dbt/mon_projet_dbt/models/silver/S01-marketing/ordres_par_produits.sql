@@ -8,7 +8,8 @@ select
        o.quantite,
        o.montant,
        p.nom_produit,
-       p.categorie
+       p.categorie,
+       p.stock
 
 FROM {{ ref('ordres') }} o
 
@@ -26,7 +27,8 @@ select
        quantite,
        montant,
        nom_produit,
-       categorie 
+       categorie,
+       stock 
 
 FROM ordres_produit 
 
