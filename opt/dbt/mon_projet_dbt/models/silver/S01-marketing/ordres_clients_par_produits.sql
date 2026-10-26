@@ -6,14 +6,14 @@ SELECT
        o.id_produit, 
        o.date_commande, 
        o.quantite, 
-       o.montant
+       o.montant,
        p.nom_produit,
        p.categorie
  
 FROM {{ ref('ordres') }} o
 LEFT JOIN {{ ref('clients') }} c
     ON o.id_client = c.id_client
- LEFT JOIN {{ ref('produits') }}
+ LEFT JOIN {{ ref('produits') }} p
     ON o.id_produit = p.id_produit
 
 )
